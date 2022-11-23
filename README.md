@@ -33,6 +33,7 @@ Sign The Register
 Projects
 
 - [ ] Version Control On Slides
+- [ ] client
 - [ ] Project specific statement.
 - [ ] Search Register for individual to export
 - [ ] Induction Delivered By.
@@ -42,3 +43,35 @@ Validate Induction
 
 - [ ] Set Project
 - [ ] Scan A Worker ID
+
+## DB Schema
+
+### Tables
+
+- [ ] users
+- [ ] projects
+  - [ ] id
+  - [ ] name
+  - [ ] client
+  - [ ] isLive
+  - [ ] statement
+  - [ ] user
+- [ ] clients
+- [ ] signitures
+  - [ ] name
+  - [ ] email
+  - [ ] phone
+  - [ ] project
+  - [ ] induction
+  - [ ] signature
+- [ ] inductions
+  - [ ] google drive link
+  - [ ] version number
+  - [ ] project
+
+## Helpful Libaries
+
+- [ ] Signature Capture
+- [ ] QR Code Generator
+- [ ] QR Code Reader
+- [ ] JWTs
