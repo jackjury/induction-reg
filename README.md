@@ -1,4 +1,4 @@
-# Induction Register
+# inductme.live
 
 ## MVP Features
 
@@ -49,25 +49,28 @@ Validate Induction
 ### Tables
 
 - [ ] users
-- [ ] projects
-  - [ ] id
-  - [ ] name
-  - [ ] client
-  - [ ] isLive
-  - [ ] statement
-  - [ ] user
-- [ ] clients
-- [ ] signitures
-  - [ ] name
-  - [ ] email
-  - [ ] phone
-  - [ ] project
-  - [ ] induction
-  - [ ] signature
-- [ ] inductions
-  - [ ] google drive link
-  - [ ] version number
-  - [ ] project
+- [x] projects
+  - [x] id
+  - [x] name
+  - [x] client
+  - [x] isLive
+  - [x] statement
+  - [x] user
+- [x] clients
+  - [x] Name
+  - [x] Contact
+- [x] signitures
+  - [x] name
+  - [ ] company
+  - [x] email
+  - [x] phone
+  - [x] project
+  - [x] induction
+  - [x] signature
+- [x] inductions
+  - [x] google drive link
+  - [x] version number
+  - [x] project
 
 ## Helpful Libaries
 
