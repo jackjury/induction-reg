@@ -74,7 +74,7 @@ Validate Induction
 
 ## Helpful Libaries
 
-- [ ] Signature Capture
-- [ ] QR Code Generator
+- [ ] Signature Capture - https://www.npmjs.com/package/react-signature-canvas#api
+- [ ] QR Code Generator - https://www.npmjs.com/package/qr-code-styling
 - [ ] QR Code Reader
 - [ ] JWTs

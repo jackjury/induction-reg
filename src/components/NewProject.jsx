@@ -20,11 +20,9 @@ function NewProject({ session }) {
     e.preventDefault();
 
     try {
-      setLoading(true);
       const { user } = session;
 
       const project = {
-        id: 12312324,
         user_id: user.id,
         name: projectDetails.projectName,
         statement: projectDetails.statement,

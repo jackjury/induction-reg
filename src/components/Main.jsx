@@ -9,6 +9,10 @@ import Account from "./auth/Account";
 import NewProject from "./NewProject";
 import Sign from "./sign";
 import Home from "./Home";
+import Projects from "./admin/Projects";
+import Project from "./admin/Project";
+import GoogleSlides from "./GoogleSlides";
+import CaptureSignature from "./CaptureSignature";
 
 function Main() {
   const [session, setSession] = useState(null);
@@ -27,6 +31,7 @@ function Main() {
     <>
       <Navigation />
       <Routes>
+        <Route path="sign" element={<p>Check the code and try again</p>} />
         <Route path="sign/:projectID" element={<Sign />} />
 
         <Route path="*" element={<h1>404</h1>} />
@@ -46,8 +51,21 @@ function Main() {
           }
         >
           <Route path="new" element={<NewProject session={session} />} />
-          <Route path="projects" element={<h1>Projects</h1>} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="project/:projectID" element={<Project />} />
         </Route>
+        <Route
+          path="/capture"
+          element={
+            <>
+              <CaptureSignature
+                sendData={(data) => {
+                  console.log(data);
+                }}
+              />
+            </>
+          }
+        ></Route>
 
         <Route path="/" element={<Home />}></Route>
       </Routes>
