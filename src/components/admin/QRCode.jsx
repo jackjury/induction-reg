@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 import logo from "../../img/inductmelive-website-favicon-black.png";
+import { Button } from "react-bootstrap";
 
 const qrCode = new QRCodeStyling({
   width: 300,
@@ -43,7 +44,7 @@ function QRCode({ uuid, projectName }) {
   };
 
   return (
-    <div className="">
+    <div className="mt-5">
       <div ref={ref} />
 
       <div style={styles.inputWrapper}>
@@ -52,8 +53,8 @@ function QRCode({ uuid, projectName }) {
           <option value="jpeg">JPEG</option>
           <option value="webp">WEBP</option>
         </select>
-        <button onClick={onDownloadClick}>Download</button>
       </div>
+      <Button onClick={onDownloadClick}>Download QR Code</Button>
     </div>
   );
 }
