@@ -3,6 +3,8 @@ import { Button, Table, Modal, Form } from "react-bootstrap";
 import GoogleSlides from "../GoogleSlides";
 import { supabase } from "../auth/supabaseClient";
 
+import formatDate from "../../libs/timeformat";
+
 function Inductions({ id, session }) {
   const [inductions, setInductions] = useState();
 
@@ -82,7 +84,8 @@ function Inductions({ id, session }) {
               return (
                 <tr>
                   <td>{induction.version}</td>
-                  <td>{induction.created_at}</td> {/* Format this! */}
+                  <td>{formatDate(induction.created_at)}</td>{" "}
+                  {/* Format this! */}
                   <td>
                     <a href={induction.url}>Slides</a>
                   </td>

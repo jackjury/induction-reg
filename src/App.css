@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+/* body {
+  background-color: #0718c4;
+  color: white;
+} */
+
+.navbar-inductme {
+  background-color: #0718c4;
+}
+
+.home-logo {
+  width: 80%;
+  margin: 20%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
-import logo from "../../img/inductmelive-website-favicon-black.png";
+import logo from "../../img/inductmelive-icon-only-black.png";
 import { Button } from "react-bootstrap";
 
 const qrCode = new QRCodeStyling({

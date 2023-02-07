@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { supabase } from "../auth/supabaseClient";
 import { Table } from "react-bootstrap";
+import formatDate from "../../libs/timeformat";
 
 function InductionRegister({ id }) {
   const [signatures, setSignatures] = useState(null);
@@ -38,7 +39,7 @@ function InductionRegister({ id }) {
             {signatures.map((signature) => {
               return (
                 <tr>
-                  <td>{signature.created_at}</td>
+                  <td>{formatDate(signature.created_at)}</td>
                   <td>{signature.name}</td>
                   <td>{signature.company}</td>
                   <td>Link</td>

@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { Table, Nav } from "react-bootstrap";
+import { Table, Nav, Container } from "react-bootstrap";
 import { supabase } from "../auth/supabaseClient";
 
 function Projects({ session }) {
@@ -19,30 +19,34 @@ function Projects({ session }) {
     return <p>Loading.... Maybe</p>;
   } else {
     return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Project ID</th>
-            <th>Project Name</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => {
-            return (
-              <tr>
-                <td>{project.uuid}</td>
-                <td>{project.name}</td>
-                <td>
-                  <Nav.Link href={`/admin/project/${project.uuid}`}>
-                    Edit{" "}
-                  </Nav.Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <Container>
+        <h2>Projects</h2>
+
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Project ID</th>
+              <th>Project Name</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projects.map((project) => {
+              return (
+                <tr>
+                  <td>{project.uuid}</td>
+                  <td>{project.name}</td>
+                  <td>
+                    <Nav.Link href={`/admin/project/${project.uuid}`}>
+                      Edit{" "}
+                    </Nav.Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Container>
     );
   }
 }

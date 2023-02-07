@@ -1,52 +1,78 @@
 import { useState } from "react";
-import { Routes, Route, Link, Outlet } from "react-router-dom";
 import { supabase } from "./supabaseClient";
+import { Form, Button, Container, Alert, Spinner } from "react-bootstrap";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState({
+    visible: false,
+    type: "secondary",
+    message: "",
+  });
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
+      setMessage({
+        visible: true,
+        type: "secondary",
+        message: "",
+      });
       const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) throw error;
-      alert("Check your email for the login link!");
+      setMessage({
+        visible: true,
+        type: "success",
+        message: "Check your email for the login link!",
+      });
     } catch (error) {
-      alert(error.error_description || error.message);
+      setMessage({
+        visible: true,
+        type: "danger",
+        message: error.error_description || error.message,
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="row flex-center flex">
-      <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
-        <p className="description">
-          Sign in via magic link with your email below
-        </p>
-        {loading ? (
-          "Sending magic link..."
-        ) : (
-          <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button className="button block" aria-live="polite">
-              Send magic link
-            </button>
-          </form>
-        )}
-      </div>
-    </div>
+    <Container>
+      <h2>Sign In</h2>
+      {message.visible ? (
+        <Alert variant={message.type}>
+          {loading ? <Spinner className="ml-3" /> : <></>}
+          {message.message}
+        </Alert>
+      ) : (
+        <></>
+      )}
+      {loading ? (
+        <></>
+      ) : (
+        <>
+          <Form onSubmit={handleLogin}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                We will send you a magic link to log in with
+              </Form.Text>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </>
+      )}
+    </Container>
   );
 }

@@ -1,6 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
 import Navigation from "./Navigation";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  redirect,
+} from "react-router-dom";
 import { supabase } from "./auth/supabaseClient";
 
 import Auth from "./auth/Auth";
@@ -29,7 +35,7 @@ function Main() {
 
   return (
     <>
-      <Navigation />
+      <Navigation session={session} />
       <Routes>
         <Route path="sign" element={<p>Check the code and try again</p>} />
         <Route path="sign/:projectID" element={<Sign />} />
@@ -39,14 +45,7 @@ function Main() {
           path="admin"
           element={
             <div className="container" style={{ padding: "50px 0 100px 0" }}>
-              {!session ? (
-                <Auth />
-              ) : (
-                <>
-                  <Account key={session.user.id} session={session} />
-                  <Outlet />
-                </>
-              )}
+              {!session ? <Auth /> : <Outlet />}
             </div>
           }
         >
@@ -67,7 +66,7 @@ function Main() {
           }
         ></Route>
 
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home session={session} />}></Route>
       </Routes>
     </>
   );
