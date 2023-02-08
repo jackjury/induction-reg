@@ -1,20 +1,35 @@
 import React, { Component, useState, useEffect } from "react";
 import { supabase } from "../auth/supabaseClient";
 import { Card, Button, Form } from "react-bootstrap";
+import Loading from "../Loading";
 
-function ProjectDetails({ projectID }) {
+function ProjectDetails({ uuid }) {
   const [project, setProject] = useState(null);
   const getProject = async () => {
     let { data: projects, error } = await supabase
       .from("projects")
       .select("*")
-      .eq("uuid", projectID);
+      .eq("uuid", uuid);
 
     setProject(projects[0]);
   };
   const updateProject = async (e) => {
     e.preventDefault();
-    // ACTUALLY DO SOMETHING HERE!
+    try {
+      const { data, error } = await supabase
+        .from("projects")
+        .update(project)
+        .eq("id", project.id)
+        .select();
+      if (error) {
+        throw error;
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      getProject();
+    }
   };
   const handleChange = (e) => {
     setProject({ ...project, [e.target.name]: e.target.value });
@@ -30,7 +45,7 @@ function ProjectDetails({ projectID }) {
   if (!project) {
     return (
       <>
-        <p>Loading... Maybe....</p>
+        <Loading />
       </>
     );
   } else {

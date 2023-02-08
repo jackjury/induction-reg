@@ -1,14 +1,15 @@
 import React, { Component, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../auth/supabaseClient";
-import { Tabs, Tab, Sonnet } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
 import QRCode from "./QRCode";
 import Inductions from "./Inductions";
 import ProjectDetails from "./ProjectDetails";
 import InductionRegister from "./InductionReg";
+import Loading from "../Loading";
 
 function Project() {
-  const { projectID } = useParams();
+  const { uuid } = useParams();
   const [project, setProject] = useState(null);
   const [key, setKey] = useState("details");
 
@@ -16,7 +17,7 @@ function Project() {
     let { data: projects, error } = await supabase
       .from("projects")
       .select("*")
-      .eq("uuid", projectID);
+      .eq("uuid", uuid);
 
     setProject(projects[0]);
   };
@@ -32,7 +33,7 @@ function Project() {
   if (!project) {
     return (
       <>
-        <p>Loading... Maybe....</p>
+        <Loading />
       </>
     );
   } else {
@@ -46,7 +47,7 @@ function Project() {
           className="mb-3"
         >
           <Tab eventKey="details" title="Details">
-            <ProjectDetails projectID={projectID} />
+            <ProjectDetails uuid={uuid} />
           </Tab>
           <Tab eventKey="inductions" title="Inductions">
             <Inductions id={project.id} />

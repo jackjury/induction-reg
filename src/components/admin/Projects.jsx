@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import { Table, Nav, Container } from "react-bootstrap";
 import { supabase } from "../auth/supabaseClient";
+import Loading from "../Loading";
 
 function Projects({ session }) {
   const [projects, setProjects] = useState(null);
@@ -16,7 +17,7 @@ function Projects({ session }) {
     console.log(projects);
   }, []);
   if (!projects) {
-    return <p>Loading.... Maybe</p>;
+    return <Loading />;
   } else {
     return (
       <Container>

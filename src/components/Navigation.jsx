@@ -8,7 +8,7 @@ import logo from "../img/logo-no-background.png";
 function Navigation({ session }) {
   return (
     <>
-      <Navbar className="navbar-inductme" variant="dark">
+      <Navbar expand="lg" className="navbar-inductme" variant="dark">
         <Container>
           <Navbar.Brand href="/">
             <img

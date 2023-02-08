@@ -10,14 +10,12 @@ import {
 import { supabase } from "./auth/supabaseClient";
 
 import Auth from "./auth/Auth";
-import Account from "./auth/Account";
 
 import NewProject from "./NewProject";
 import Sign from "./sign";
 import Home from "./Home";
 import Projects from "./admin/Projects";
 import Project from "./admin/Project";
-import GoogleSlides from "./GoogleSlides";
 import CaptureSignature from "./CaptureSignature";
 
 function Main() {
@@ -51,7 +49,7 @@ function Main() {
         >
           <Route path="new" element={<NewProject session={session} />} />
           <Route path="projects" element={<Projects />} />
-          <Route path="project/:projectID" element={<Project />} />
+          <Route path="project/:uuid" element={<Project />} />
         </Route>
         <Route
           path="/capture"

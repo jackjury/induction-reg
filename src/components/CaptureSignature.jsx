@@ -16,6 +16,7 @@ function CaptureSignature({ sendData }) {
   let sigPad = {};
   return (
     <div className="mb-5">
+      {data ? <p>Saved</p> : <></>}
       <div
         style={{
           border: "solid 5px",
@@ -31,9 +32,14 @@ function CaptureSignature({ sendData }) {
           }}
         />
       </div>
-      <Button onClick={resetCanvas}>Reset</Button>
-      <Button onClick={toBase64}>Save</Button>
-      {data ? <p>Saved</p> : <></>}
+      <div>
+        <Button className="m-2" onClick={resetCanvas}>
+          Reset
+        </Button>
+        <Button className="m-2" onClick={toBase64}>
+          Save
+        </Button>
+      </div>
     </div>
   );
 }
