@@ -11,6 +11,17 @@ export default function Auth() {
     message: "",
   });
 
+  const getRedirect = () => {
+    console.log("ENV", process.env.NODE_ENV);
+    let output = { emailRedirectTo: null };
+    if (process.env.NODE_ENV == "development") {
+      output.emailRedirectTo = "http://localhost:3000/";
+    } else {
+      output.emailRedirectTo = "https://inductme.live";
+    }
+    return output;
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -21,7 +32,11 @@ export default function Auth() {
         type: "secondary",
         message: "",
       });
-      const { error } = await supabase.auth.signInWithOtp({ email });
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: getRedirect(),
+      });
       if (error) throw error;
       setMessage({
         visible: true,

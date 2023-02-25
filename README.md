@@ -1,30 +1,38 @@
 # inductme.live
 
+## Bug Bash
+
+- [ ] Project statement doesn't save during set up.
+- [ ] Disable the submit button on the induction form.
+- [ ] Do validation on signitures.
+
 ## MVP Features
 
 Sign The Register
 
-- [ ] Read Statement
-- [ ] Link to Slides
+- [x] Read Statement
+- [x] Link to Slides
 
-- [ ] Name
-- [ ] Company
-- [ ] Agreement
-- [ ] Capture Date & Time
+- [x] Name
+- [x] Company
+- [x] Agreement
+- [x] Capture Date & Time
 
 - [ ] Provides a final screen, now collect band
 
 Projects
 
-- [ ] Link to Google Slide Deck
-- [ ] Sign The Register QR Code
-- [ ] Export Whole Register
+- [x] Link to Google Slide Deck
+- [x] Sign The Register QR Code
+- [x] Export Whole Register
+  - [x] CSV
+  - [ ] PDF
 
 ## 1.0 Features
 
 Sign The Register
 
-- [ ] Signature
+- [x] Signature
 - [ ] Capture Contact Details (Phone / Email)
 - [ ] Geocapture
 - [ ] Generate Worker ID and Email it

@@ -46,6 +46,7 @@ function QRCode({ uuid, projectName }) {
   return (
     <div className="mt-5">
       <div ref={ref} />
+      <a href={url}>{url}</a>
 
       <div style={styles.inputWrapper}>
         <select onChange={onExtensionChange} value={fileExt}>

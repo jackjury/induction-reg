@@ -5,7 +5,7 @@ import { supabase } from "../auth/supabaseClient";
 
 import formatDate from "../../libs/timeformat";
 
-function Inductions({ id, session }) {
+function Inductions({ id, session, setHasInductions }) {
   const [inductions, setInductions] = useState();
 
   const [show, setShow] = useState(false);
@@ -25,14 +25,20 @@ function Inductions({ id, session }) {
   });
   const getInductions = async () => {
     // Get inductions where project_id = id
+    setHasInductions(false);
+
     try {
       let { data: inductions, error } = await supabase
         .from("inductions")
-        .select("*");
-      // .eq("project_id", id);
+        .select("*")
+        .eq("project_id", id);
       if (error) {
         throw error;
       }
+      if (inductions.length > 0) {
+        setHasInductions(true);
+      }
+      console.log("Data back: ", inductions);
       setInductions(inductions);
     } catch (error) {
       console.log(error);
@@ -84,7 +90,7 @@ function Inductions({ id, session }) {
               return (
                 <tr>
                   <td>{induction.version}</td>
-                  <td>{formatDate(induction.created_at)}</td>{" "}
+                  <td>{formatDate(induction.created_at)}</td>
                   {/* Format this! */}
                   <td>
                     <a href={induction.url}>Slides</a>

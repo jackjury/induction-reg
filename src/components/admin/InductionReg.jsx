@@ -3,8 +3,9 @@ import { supabase } from "../auth/supabaseClient";
 import { Button, Table } from "react-bootstrap";
 import formatDate from "../../libs/timeformat";
 import Loading from "../Loading";
+import PDF from "./PDF";
 
-function InductionRegister({ id }) {
+function InductionRegister({ id, project }) {
   const [signatures, setSignatures] = useState(null);
   const getSignatures = async () => {
     try {
@@ -15,9 +16,10 @@ function InductionRegister({ id }) {
       if (error) {
         throw error;
       }
-      console.log(signatures);
       setSignatures(signatures);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getCsv = () => {
@@ -40,14 +42,18 @@ function InductionRegister({ id }) {
 
   useEffect(() => {
     getSignatures();
+    console.log(signatures);
   }, []);
 
   if (!signatures) {
     return <Loading />;
+  }
+  if (signatures.length == 0) {
+    return <>You don't have any signatures yet.</>;
   } else {
     return (
       <>
-        <Table striped bordered hover className="mb-3">
+        <Table striped bordered hover className="mb-3" id="induction-reg">
           <thead>
             <tr>
               <th>Date / Time</th>
@@ -75,7 +81,15 @@ function InductionRegister({ id }) {
           </tbody>
         </Table>
         <h5>Export Register</h5>
-        <Button onClick={getCsv}>CSV</Button>
+        <Button className="mr-2" onClick={getCsv}>
+          CSV
+        </Button>{" "}
+        <PDF
+          className="ml-2"
+          data={signatures}
+          headers={[["Date / Time", "Name", "Company", "Signature"]]}
+          project={project}
+        />
       </>
     );
   }

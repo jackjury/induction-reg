@@ -7,11 +7,13 @@ import Inductions from "./Inductions";
 import ProjectDetails from "./ProjectDetails";
 import InductionRegister from "./InductionReg";
 import Loading from "../Loading";
+import { hasFormSubmit } from "@testing-library/user-event/dist/utils";
 
 function Project() {
   const { uuid } = useParams();
   const [project, setProject] = useState(null);
   const [key, setKey] = useState("details");
+  const [hasInductions, setHasInductions] = useState(false);
 
   const getProject = async () => {
     let { data: projects, error } = await supabase
@@ -23,7 +25,7 @@ function Project() {
   };
 
   useEffect(() => {
-    console.log(project);
+    console.log("Inductions, ", hasInductions);
   });
   useEffect(() => {
     getProject();
@@ -50,13 +52,20 @@ function Project() {
             <ProjectDetails uuid={uuid} />
           </Tab>
           <Tab eventKey="inductions" title="Inductions">
-            <Inductions id={project.id} />
+            <Inductions id={project.id} setHasInductions={setHasInductions} />
           </Tab>
           <Tab eventKey="qr" title="QR Code">
-            <QRCode uuid={project.uuid} projectName={project.name} />
+            {hasInductions ? (
+              <QRCode uuid={project.uuid} projectName={project.name} />
+            ) : (
+              <>
+                You will need to add an induction to the project before you can
+                download your QR Code
+              </>
+            )}
           </Tab>
           <Tab eventKey="reg" title="Register">
-            <InductionRegister id={project.id} />
+            <InductionRegister id={project.id} project={project} />
           </Tab>
         </Tabs>
       </>
