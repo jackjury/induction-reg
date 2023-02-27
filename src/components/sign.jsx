@@ -9,7 +9,7 @@ import Loading from "./Loading";
 function Sign() {
   const { projectID } = useParams();
   useEffect(() => {
-    // console.log(formData);
+    console.log(project);
   });
   const [message, setMessage] = useState({
     visible: false,
@@ -21,6 +21,8 @@ function Sign() {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
+    email: "",
+    phone: "",
     agree: false,
     signature: null,
     project_id: null,
@@ -79,6 +81,8 @@ function Sign() {
       setFormData({
         name: "",
         company: "",
+        email: "",
+        phone: "",
         agree: false,
         signature: null,
         project_id: null,
@@ -124,32 +128,46 @@ function Sign() {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Your Name</Form.Label>
-            <Form.Control
-              type="input"
-              placeholder="Enter Your Full Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="company">
-            <Form.Label>Your Company</Form.Label>
-            <Form.Control
-              type="input"
-              placeholder="Enter Your Company"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-            />
-            <Form.Text className="text-muted">
-              Please enter the name of the company you are working for onsite,
-              if you are freelance, please tell us which department you are
-              working for.
-            </Form.Text>
-          </Form.Group>
-          <CaptureSignature sendData={handleSignature} />
+
+          {project.data_req.Name ? (
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Your Name</Form.Label>
+              <Form.Control
+                type="input"
+                placeholder="Enter Your Full Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+          ) : (
+            <></>
+          )}
+          {project.data_req.Company ? (
+            <Form.Group className="mb-3" controlId="company">
+              <Form.Label>Your Company</Form.Label>
+              <Form.Control
+                type="input"
+                placeholder="Enter Your Company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+              />
+              <Form.Text className="text-muted">
+                Please enter the name of the company you are working for onsite,
+                if you are freelance, please tell us which department you are
+                working for.
+              </Form.Text>
+            </Form.Group>
+          ) : (
+            <></>
+          )}
+          {project.data_req.Signature ? (
+            <CaptureSignature sendData={handleSignature} />
+          ) : (
+            <></>
+          )}
+
           <Button variant="primary" onClick={submitForm}>
             Submit
           </Button>

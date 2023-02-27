@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { supabase } from "../auth/supabaseClient";
 import { Card, Button, Form } from "react-bootstrap";
 import Loading from "../Loading";
+import DataCollection from "./DataCollection";
 
 function ProjectDetails({ uuid }) {
   const [project, setProject] = useState(null);
@@ -86,6 +87,7 @@ function ProjectDetails({ uuid }) {
             Update Project Details
           </Button>
         </Form>
+        <DataCollection project={project}></DataCollection>
       </>
     );
   }
