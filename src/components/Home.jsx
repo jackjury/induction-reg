@@ -8,7 +8,14 @@ function Home({ session }) {
     <Container className="d-flex flex-column justify-content-center align-items-center text-center">
       <img src={logo} className="home-logo " />
       <h2>To set up an new induction register</h2>
-      <Button className="mt-2">Sign In</Button>
+      {session ? (
+        <p>
+          <a href="./admin/new">Start a new project</a>
+        </p>
+      ) : (
+        <Button className="mt-2">Sign In</Button>
+      )}
+
       <h5 className="mt-5  font-italic">
         If you are here to sign the induction register, please use the QR Code
         provided by your safety advisor.
