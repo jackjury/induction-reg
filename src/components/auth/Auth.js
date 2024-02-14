@@ -17,7 +17,7 @@ export default function Auth() {
     if (process.env.NODE_ENV == "development") {
       output.emailRedirectTo = "http://localhost:3000/";
     } else {
-      output.emailRedirectTo = "https://inductme.live";
+      output.emailRedirectTo = "https://inductme.netlify.app/";
     }
     return output;
   };
