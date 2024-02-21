@@ -5,6 +5,20 @@
 - [ ] Project statement doesn't save during set up.
 - [ ] Disable the submit button on the induction form.
 - [ ] Do validation on signitures.
+- [ ] Make options work
+- [ ] Can't untick the isLive box
+
+## Make it V1
+
+- [ ] Make projects either reg or online induction
+  - Online
+    - [ ] Choose between videos or google slides for Induction
+    - [ ] Implement a delay to make sure they watched it.
+      - [ ] Check tab is in foreground and pause if not.
+    - [ ] NO QR Code
+  - Reg
+    - [ ] As is
+- [ ] Add in human friendly URLS
 
 ## MVP Features
 
@@ -86,3 +100,4 @@ Validate Induction
 - [ ] QR Code Generator - https://www.npmjs.com/package/qr-code-styling
 - [ ] QR Code Reader
 - [ ] JWTs
+- https://webgazer.cs.brown.edu/
