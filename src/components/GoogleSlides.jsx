@@ -2,8 +2,6 @@ import { logDOM } from "@testing-library/react";
 import React, { Component, useEffect } from "react";
 
 function GoogleSlides({ url }) {
-  let localUrl =
-    "https://docs.google.com/presentation/d/e/2PACX-1vSnbzd__EN-Zz4AlkAmhIE-AXyUsPW8JpBKpbyHSxuab7jD3muy3xRjOFxVA6wyYd-IxAgsQtskjYJF";
   useEffect(() => {
     console.log(url);
   });

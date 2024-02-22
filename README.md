@@ -13,6 +13,10 @@
 - [ ] Make projects either reg or online induction
   - Online
     - [ ] Choose between videos or google slides for Induction
+      - Added in 'type' col to inductions table
+      - 'gslides' - Google Slides
+      - 'yt' - Youtube
+      - 'vimeo' - Vimeo
     - [ ] Implement a delay to make sure they watched it.
       - [ ] Check tab is in foreground and pause if not.
     - [ ] NO QR Code

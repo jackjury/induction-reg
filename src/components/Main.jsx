@@ -17,6 +17,7 @@ import Home from "./Home";
 import Projects from "./admin/Projects";
 import Project from "./admin/Project";
 import CaptureSignature from "./CaptureSignature";
+import Inductions from "./admin/Inductions";
 
 function Main() {
   const [session, setSession] = useState(null);
@@ -37,7 +38,8 @@ function Main() {
       <Routes>
         <Route path="sign" element={<p>Check the code and try again</p>} />
         <Route path="sign/:projectID" element={<Sign />} />
-
+        <Route path="test" element={<Inductions />} /> // remove before
+        production
         <Route path="*" element={<h1>404</h1>} />
         <Route
           path="admin"
@@ -63,7 +65,6 @@ function Main() {
             </>
           }
         ></Route>
-
         <Route path="/" element={<Home session={session} />}></Route>
       </Routes>
     </>
