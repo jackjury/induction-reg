@@ -6,7 +6,8 @@
 - [ ] Disable the submit button on the induction form.
 - [ ] Do validation on signitures.
 - [ ] Make options work
-- [ ] Can't untick the isLive box
+- [ ] Can't un-tick the isLive box
+- [ ] Make signature validation be required.
 
 ## Make it V1
 

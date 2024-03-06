@@ -18,6 +18,7 @@ import Projects from "./admin/Projects";
 import Project from "./admin/Project";
 import CaptureSignature from "./CaptureSignature";
 import Inductions from "./admin/Inductions";
+import PassChange from "./PassChange";
 
 function Main() {
   const [session, setSession] = useState(null);
@@ -52,6 +53,7 @@ function Main() {
           <Route path="new" element={<NewProject session={session} />} />
           <Route path="projects" element={<Projects />} />
           <Route path="project/:uuid" element={<Project />} />
+          <Route path="change-password" element={<PassChange />} />
         </Route>
         <Route
           path="/capture"

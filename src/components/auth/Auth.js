@@ -40,13 +40,22 @@ export default function Auth() {
       });
       return;
     }
-
     try {
-      // Do password reset
-      await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: getRedirect(),
+      setLoading(true);
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${getRedirect()}/admin/change-password`,
       });
-    } catch (error) {}
+      if (error) throw error;
+      console.log(data);
+    } catch (error) {
+      setMessage({
+        visible: true,
+        type: "danger",
+        message: error.error_description || error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLogin = async (e) => {
@@ -69,9 +78,11 @@ export default function Auth() {
         message: "",
       });
 
-      const { error } = await supabase.auth.signInWithOtp({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
+        password,
       });
+
       if (error) throw error;
       setMessage({
         visible: true,
@@ -121,7 +132,7 @@ export default function Auth() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter Pasword"
+                placeholder="Enter Password"
                 value={password}
                 onChange={(e) => {
                   resetMessage();
