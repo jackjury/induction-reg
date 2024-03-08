@@ -10,6 +10,7 @@
 - [ ] Make signature validation be required.
 - [ ] Check the yt link is a 'watch' url
 - [ ] Change the title once in a while!
+- [ ] change password doesnt work in production.
 
 ## Make it V1
 

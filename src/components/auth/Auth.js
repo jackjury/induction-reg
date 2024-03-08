@@ -26,7 +26,7 @@ export default function Auth() {
     if (process.env.NODE_ENV == "development") {
       output.emailRedirectTo = "http://localhost:3000/";
     } else {
-      output.emailRedirectTo = "https://";
+      output.emailRedirectTo = "https://inductme.live";
     }
     return output;
   };
@@ -43,7 +43,7 @@ export default function Auth() {
     try {
       setLoading(true);
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${getRedirect()}/admin/change-password`,
+        redirectTo: `${getRedirect()}admin/change-password`,
       });
       if (error) throw error;
       console.log(data);
