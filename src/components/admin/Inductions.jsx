@@ -1,20 +1,21 @@
 import React, { Component, useState, useEffect } from "react";
 import { Button, Table, Modal, Form } from "react-bootstrap";
-import GoogleSlides from "../GoogleSlides";
 import { supabase } from "../auth/supabaseClient";
 
 import formatDate from "../../libs/timeformat";
+import DisplayInduction from "../DisplayInduction";
 
 function Inductions({ id, session, setHasInductions }) {
   const [inductions, setInductions] = useState();
 
   const [show, setShow] = useState(false);
-  const [validSlides, setValidSlides] = useState(false);
+  const [validUrl, setValidUrl] = useState(false);
 
   const [newInduction, setNewInduction] = useState({
     version: "",
     url: "",
     project_id: id,
+    type: "NULL",
   });
 
   useEffect(() => {
@@ -22,6 +23,7 @@ function Inductions({ id, session, setHasInductions }) {
   }, []);
   useEffect(() => {
     console.log(inductions);
+    console.log(newInduction);
   });
   const getInductions = async () => {
     // Get inductions where project_id = id
@@ -52,10 +54,38 @@ function Inductions({ id, session, setHasInductions }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleUrl = (e) => {
-    let url = e.target.value.split("/pub")[0];
-    console.log(url);
-    setNewInduction({ ...newInduction, url });
-    setValidSlides(true); // ACTUALLY DO A CHECK!
+    // TODO: Make the search better, and perform more validation.
+    // TODO: is "NULL" the only way of achiving the select default?
+    // Check if its a google slides
+    if (e.target.value.search("google") > -1) {
+      setValidUrl(true);
+      let type = "gslide";
+      // if google slides
+      let url = e.target.value.split("/pub")[0];
+      console.log(url);
+      setNewInduction({ ...newInduction, url, type });
+      return;
+    }
+    // Check if its a vimeo
+    if (e.target.value.search("vimeo") > -1) {
+      setValidUrl(true);
+      let type = "vimeo";
+      let url = e.target.value;
+      setNewInduction({ ...newInduction, url, type });
+      return;
+    }
+    // Check if its a YT
+    if (e.target.value.search("youtube") > -1) {
+      setValidUrl(true);
+      let type = "yt";
+      // TODO: check if its a valid 'watch' link
+      let url = e.target.value;
+      console.log(url);
+      setNewInduction({ ...newInduction, url, type });
+      return;
+    }
+    setValidUrl(false);
+    setNewInduction({ ...newInduction, url: e.target.value, type: "NULL" });
   };
   const addInduction = async () => {
     try {
@@ -123,18 +153,49 @@ function Inductions({ id, session, setHasInductions }) {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formProjectStatement">
-              <Form.Label>Google Slides</Form.Label>
+            <Form.Group className="mb-3" controlId="formUrl">
+              <Form.Label>Induction URL</Form.Label>
               <Form.Control
                 type="input"
-                placeholder="Paste the google slides link link here"
+                placeholder="Paste the URL link here"
                 name="url"
                 value={newInduction.url}
                 onChange={handleUrl}
               />
             </Form.Group>
+            <Form.Group controlId="formType">
+              <Form.Label>URL Type</Form.Label>
+              <Form.Control
+                as="select"
+                value={newInduction.type}
+                onChange={(e) => {
+                  setNewInduction({ ...newInduction, type: e.target.value });
+                }}
+              >
+                <option value="NULL">-- Select URL Type --</option>
+
+                <option value="yt">Youtube Video</option>
+                <option value="vimeo">Vimeo Video</option>
+                <option value="gslide">Google Slides</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formProjectStatement"
+            ></Form.Group>
           </Form>
-          {validSlides ? <GoogleSlides url={newInduction.url} /> : <></>}
+
+          {
+            validUrl ? (
+              <DisplayInduction
+                url={newInduction.url}
+                urlType={newInduction.type}
+              />
+            ) : (
+              <></>
+            ) //}           {
+            // TODO: make this Component load all types
+          }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
