@@ -78,7 +78,7 @@ function Inductions({ id, session, setHasInductions }) {
     if (e.target.value.search("youtube") > -1) {
       setValidUrl(true);
       let type = "yt";
-      // if google slides
+      // TODO: check if its a valid 'watch' link
       let url = e.target.value;
       console.log(url);
       setNewInduction({ ...newInduction, url, type });

@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import CaptureSignature from "./CaptureSignature";
 import GoogleSlides from "./GoogleSlides";
+import DisplayInduction from "./DisplayInduction";
 import { supabase } from "./auth/supabaseClient";
 import Loading from "./Loading";
 
@@ -108,17 +109,18 @@ function Sign() {
   } else {
     return (
       <Container className="mt-5 d-flex flex-column align-content-center justify-content-center">
-        <h2 className="mb-3 text-center">Sign the Induction Register</h2>
+        <h2 className="mb-3 text-center">{project.name}</h2>
         {message.visible ? (
           <Alert variant={message.type}>{message.message}</Alert>
         ) : (
           <></>
         )}
-        <h3 className="mb-3">{project.name}</h3>
-        <p className="mb-3">{project.statement}</p>
-        <GoogleSlides
+        <DisplayInduction
           url={project.inductions[project.inductions.length - 1].url}
+          urlType={project.inductions[project.inductions.length - 1].type}
         />
+        <p className="mb-3">{project.statement}</p>
+
         <Form>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check

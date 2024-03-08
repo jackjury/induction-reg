@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React, { Component, useEffect } from "react";
 
 function GoogleSlides({ url }) {
