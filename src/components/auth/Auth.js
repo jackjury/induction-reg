@@ -27,6 +27,7 @@ export default function Auth() {
       output.emailRedirectTo = "http://localhost:3000/";
     } else {
       output.emailRedirectTo = "https://";
+
     }
     return output;
   };
